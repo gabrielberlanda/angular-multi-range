@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "tolentinos-challenge"
+    }
+  },
+  "defaultProject": "tolentinos-challenge",
+  "cli": {
+    "analytics": "cfb2b40a-30a2-4a62-99c2-589a4b04187d"
+  }
 }

@@ -1,0 +1,33 @@
+<p>range works!</p>
+<!-- <div id="range-container">
+  <input type="range" name="min" min="0" max="100" [(ngModel)]="min" />
+  <input type="range" name="max" min="0" max="100" [(ngModel)]="max" />
+</div>
+<br/> -->
+
+<div class='multi-range'>
+  <hr class="runnable" />
+  <hr class="wrap" style="--left: {{wrap.left}}; --right: {{ wrap.right }}"/>
+  <input type='range' 
+         [min]="minValue" [max]="maxValue"
+         [(ngModel)]="min"
+  />
+  <input type='range' 
+        [min]="minValue" [max]="maxValue" 
+        [(ngModel)]="max"
+  />
+</div>
+
+
+{{ minV }} - {{ maxV }}
+
+<p>{{ dif }}</p>
+
+left: {{ wrap.left }}
+rigth: {{ wrap.right }}
+
+
+<br/>
+//Resources
+<p>http://jsfiddle.net/abhitalks/a1f1k8d0/2/ </p>
+<p>https://css-tricks.com/multi-thumb-sliders-particular-two-thumb-case/</p>
