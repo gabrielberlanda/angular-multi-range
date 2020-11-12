@@ -1,33 +1,52 @@
-<p>range works!</p>
-<!-- <div id="range-container">
-  <input type="range" name="min" min="0" max="100" [(ngModel)]="min" />
-  <input type="range" name="max" min="0" max="100" [(ngModel)]="max" />
+<div class="label-container" style="display: flex; flex-direction: row;">
+  <label class="slider-label" style="flex: 1;">{{ label }}</label>
+  <span *ngIf="optional" style="font-style: italic; font-size: 90%">(Opcional)</span>
 </div>
-<br/> -->
+  
+<div class="input-container" *ngIf="value">
+  <span *ngIf="!hideValues">{{ minValue }}</span>
 
-<div class='multi-range'>
-  <hr class="runnable" />
-  <hr class="wrap" style="--left: {{wrap.left}}; --right: {{ wrap.right }}"/>
-  <input type='range' 
-         [min]="minValue" [max]="maxValue"
-         [(ngModel)]="min"
-  />
-  <input type='range' 
-        [min]="minValue" [max]="maxValue" 
-        [(ngModel)]="max"
-  />
+  <div class='sliders-container'>
+
+    <input 
+      class="hidden-range" 
+      name="min"  
+      [(ngModel)]="value.min"
+      (change)="onValueChange($event)"
+      [disabled]="disabled"
+      type="range" 
+      [max]="max" 
+      [min]="min" 
+      step="1" 
+    />
+
+    <input 
+      class="main" 
+      name="max"   
+      [(ngModel)]="value.max"
+      (change)="onValueChange($event)"
+      [disabled]="disabled"
+      type="range" 
+      [max]="max" 
+      [min]="min" 
+      step="1"  
+      [ngStyle]="minStyle" 
+    />
+
+  </div>
+
+  <span *ngIf="!hideValues">{{ maxValue }}</span>
+
 </div>
 
 
-{{ minV }} - {{ maxV }}
-
-<p>{{ dif }}</p>
-
-left: {{ wrap.left }}
-rigth: {{ wrap.right }}
-
-
-<br/>
+<!-- <br/>
 //Resources
 <p>http://jsfiddle.net/abhitalks/a1f1k8d0/2/ </p>
 <p>https://css-tricks.com/multi-thumb-sliders-particular-two-thumb-case/</p>
+
+https://blog.thoughtram.io/angular/2016/07/27/custom-form-controls-in-angular-2.html
+
+
+HOT -> 
+https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/ -->

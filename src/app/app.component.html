@@ -1,2 +1,18 @@
 <h1>App works!</h1>
-<app-range></app-range>
+<app-range 
+  label="Teste"
+  [disabled]="false"
+  [hideValues]="false"
+  [optional]="false"
+  [(ngModel)]="outerValue"
+></app-range>
+
+<button (click)="outerValue.max = 15">Change outer value</button>
+
+{{ outerValue | json }}
+
+<form [formGroup]="form">
+  <app-range formControlName="reactive" [disabled]="true"></app-range>
+</form>
+
+<pre>{{ form.value | json }}</pre>
