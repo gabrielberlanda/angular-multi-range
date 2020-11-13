@@ -4,11 +4,13 @@
   flex-direction: row;
 
   .slider-label {
+    color: #57686b;
+    font-weight: 500;
     flex: 1;
   }
   .slider-optional-label {
     font-style: italic; 
-    font-size: 90%;
+    font-size: 80%;
   }
 
 }
@@ -40,9 +42,6 @@
   }
 }
 
-.slider-label {
-  font-weight: bold;
-}
 
 
 input[type=range] {

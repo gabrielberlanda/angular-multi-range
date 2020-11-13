@@ -92,7 +92,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "../node_modules/roboto-fontface/css/roboto/sass/roboto-fontface-black.scss",
+              "../node_modules/roboto-fontface/css/roboto/sass/roboto-fontface-black-italic.scss"
             ],
             "scripts": []
           }
