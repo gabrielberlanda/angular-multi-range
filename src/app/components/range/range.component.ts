@@ -1,7 +1,6 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-
 export interface IRangeComponentValue {
   min: number;
   max: number;
@@ -21,13 +20,12 @@ export interface IRangeComponentValue {
 })
 export class RangeComponent implements ControlValueAccessor {
   
-  @Input()
   _value: IRangeComponentValue = {
     min: 0,
     max: 0
   };
   
-  set value(val: IRangeComponentValue) {
+  @Input() set value(val: IRangeComponentValue) {
     this._value = val;
     this.propagateChanged(this._value);
   }
@@ -35,7 +33,6 @@ export class RangeComponent implements ControlValueAccessor {
   get value() {
     return this._value;
   }
-
 
   @Input()
   min: number = 0;
@@ -93,7 +90,6 @@ export class RangeComponent implements ControlValueAccessor {
     if(this._value.max >= this._value.min) return this._value.max;
     return this._value.min;
   }
-
 
   get minStyle() {
     var startval = (this.minValue - this.min) / (this.max - this.min);

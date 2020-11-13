@@ -9,6 +9,19 @@
   [(ngModel)]="outerValue"
 ></app-range>
 
+<br/>
+<br/>
+<app-range 
+  label="Teste"
+  [disabled]="false"
+  [hide-values]="false"
+  [optional]="true"
+  [disabled]="true"
+  name="outerValue"
+  ngDefaultControl
+  [(ngModel)]="outerValue"
+></app-range>
+
 <button (click)="outerValue.max = 15">Change outer value</button>
 
 {{ outerValue | json }}

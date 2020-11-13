@@ -17,7 +17,7 @@
 .sliders-container {
   position: relative;
   display: block;
-  width: 99.5%;
+  width: 100%;
 }
 
 
@@ -44,268 +44,179 @@
   font-weight: bold;
 }
 
-.sliders-container .active {
-  background: #2F9ABE;
-  color: #ECEEEE;
-  border: 0px solid #ECEEEE;
-}
 
-input[type="range"] {
+input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  width: 99.5%; /* Specific width is required for Firefox. */
+  width: 100%; /* Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */
-  // margin-left: 0%;
 }
 
-input[type="range"]::-webkit-slider-thumb {
+input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
 
-input[type="range"]:focus {
+input[type=range]:focus {
   outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
 }
 
-input[type="range"]::-ms-track {
+input[type=range]::-ms-track {
   width: 100%;
   cursor: pointer;
 
   /* Hides the slider so custom styles can be added */
-  background: transparent;
+  background: transparent; 
   border-color: transparent;
   color: transparent;
 }
 
 
-@mixin thumbFocused {
-  height: 18px;
-  width: 18px;
-}
-
-input[type="range"]:focus::-webkit-slider-thumb {
-  @include thumbFocused;
-}
-
-input[type="range"]:focus::-moz-range-thumb {
-  @include thumbFocused;
-}
-
-input[type="range"]:focus::-ms-thumb {
-  @include thumbFocused;
+@mixin thumb {
+  height  : $base-thumb-size;
+  width   : $base-thumb-size;
+  border-radius: $thumb-border-radius;
+  background: $thumb-color;
+  cursor: pointer;
 }
 
 @mixin thumbDisabled {
   cursor: not-allowed;
-  background:#B6BDBF;
+  background: $disabled-color;
 }
 
-input[type="range"]:disabled::-webkit-slider-thumb {
-  @include thumbDisabled;
+@mixin thumbFocused {
+  height: 16px;
+  width: 16px;
 }
 
-input[type="range"]:disabled::-moz-range-thumb {
-  @include thumbDisabled;
-}
 
-input[type="range"]:disabled::-ms-thumb {
-  @include thumbDisabled;
-}
+$base-thumb-size: 12px;
+$thumb-border-radius: 100%;
+$thumb-color: #2F9ABE;
+$disabled-color: #B6BDBF;
+$track-color: #ECEEEE;
+$track-width: 100% !default;
+$track-height: 4px !default;
+$track-radius: 5px !default;
 
-/* Special styling for WebKit/Blink */
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  // border: 1px solid #000000;
-  height: 12px;
-  width: 12px;
-  border-radius: 3px;
-  background:#2F9ABE;
+@mixin track {
+  width: $track-width;
+  height: $track-height;
   cursor: pointer;
-  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-  max-height: 15px;
-  max-width: 15px;
-  border-radius: 100%;
-  margin-top: -4px;
-}
-
-/* All the same stuff for Firefox */
-input[type="range"]::-moz-range-thumb {
-  // box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  // border: 1px solid #000000;
-  height: 12px;
-  width: 12px;
-  border-radius: 3px;
-  background:#2F9ABE;
-  cursor: pointer;
-  max-height: 15px;
-  max-width: 15px;
-  border-radius: 100%;
-  margin-top: -4px;
-}
-
-/* All the same stuff for IE */
-input[type="range"]::-ms-thumb {
-  // box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  // border: 1px solid #000000;
-  height: 12px;
-  width: 12px;
-  border-radius: 3px;
-  background:#2F9ABE;
-  cursor: pointer;
-  max-height: 15px;
-  max-width: 15px;
-  border-radius: 100%;
-  margin-top: -3px;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 4px;
-  cursor: pointer;
-  background: none transparent;
-  border-radius: 1.3px;
-  // border: 0px solid #010101;
-}
-
-input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: none transparent;
-}
-
-input[type="range"]::-moz-range-track {
-  width: 100%;
-  height: 4px;
-  cursor: pointer;
-  background: none transparent;
-  border-radius: 1.3px;
-  border: 20px solid #ECEEEE;
-  margin: 0;
-}
-
-input[type="range"]::-ms-track {
-  width: 100%;
-  height: 4px;
-  cursor: pointer;
+  transition: all .2s ease;
   background: transparent;
-  border-color: transparent;
-  border-width: 16px 0;
-  color: transparent;
-  z-index: -9;
-  border: 20px solid #ECEEEE;
-  margin: 0;
+  border-radius: 2px;
+}
+
+input[type="range"] {
+  &::-webkit-slider-thumb {
+    @include thumb;
+    margin-top: -4px; 
+  }
+  &::-moz-range-thumb {
+    @include thumb;
+    border: none;
+  }
+  &::-ms-thumb {
+    @include thumb;
+  }
+  &::-webkit-slider-runnable-track {
+    @include track;
+  }
+  &::-moz-range-track {
+    @include track;
+    border: 8px solid $track-color;
+  }
+  &::-ms-track {
+    @include track;
+  }
+
+  &:disabled {
+    &::-webkit-slider-thumb {
+      @include thumbDisabled;
+    }
+    &::-moz-range-thumb {
+      @include thumbDisabled;
+    }
+    &:disabled::-ms-thumb {
+      @include thumbDisabled;
+    }
+  }
+  
+  &:focus {
+    &::-webkit-slider-thumb {
+      @include thumbFocused;
+      margin-top: -6px; 
+    }
+    &::-moz-range-thumb {
+      @include thumbFocused;
+    }
+    &::-ms-thumb {
+      @include thumbFocused;
+    }
+  }
+}
+
+@mixin hiddenThumb {
+  z-index: 1;
+  pointer-events: all;
+}
+
+@mixin hiddenTrack {
+  z-index: -10;
+  pointer-events: none;
 }
 
 .hidden-range {
   position: absolute;
   z-index: 1;
   pointer-events: none;
+
+  &::-webkit-slider-thumb {
+    @include hiddenThumb;
+  }
+  &::-moz-range-thumb {
+    @include hiddenThumb;
+  }
+  &::-webkit-slider-runnable-track {
+    @include hiddenTrack;
+  }
+  &::-moz-range-track {
+    @include hiddenTrack;
+    visibility: hidden;
+  }
+  &:focus::-webkit-slider-runnable-track {
+    @include hiddenTrack;
+  }
+  
 }
 
-.hidden-range::-webkit-slider-thumb {
-  z-index: 1;
+
+@mixin mainThumb {
+  z-index: 0;
   pointer-events: all;
 }
 
-.hidden-range::-moz-range-thumb {
-  z-index: 1;
-  pointer-events: all;
-}
-
-.hidden-range::-ms-thumb {
-  z-index: 1;
-  pointer-events: all;
-}
-
-.hidden-range::-webkit-slider-runnable-track {
-  z-index: -10;
+@mixin mainTrack {
+  z-index: -11;
   pointer-events: none;
-}
-
-.hidden-range:focus::-webkit-slider-runnable-track {
-  z-index: -10;
-  pointer-events: none;
-}
-
-.hidden-range::-moz-range-track {
-  z-index: -10;
-  pointer-events: none;
-  visibility: hidden;
-}
-.hidden-range::-ms-track {
-  z-index: -40;
-  pointer-events: none;
-  visibility: hidden;
-}
-
-.hidden-range::-ms-fill-lower {
-  background: none transparent;
-  border: 0px solid #010101;
-  border-radius: 2.6px;
-  visibility: hidden;
-  z-index: -9;
-}
-.hidden-range:focus::-ms-fill-lower {
-  background: none transparent;
-}
-.hidden-range::-ms-fill-upper {
-  background: #c5c5c5;
-  border: 0px solid #010101;
-  border-radius: 2.6px;
-}
-.hidden-range:focus::-ms-fill-upper {
-  background: #c5c5c5;
 }
 
 .main {
   position: absolute;
   z-index: 0;
   pointer-events: none;
+  &::-webkit-slider-thumb {
+    @include mainThumb;
+  }
+  &::-moz-range-thumb {
+    @include mainThumb;
+  }
+  &::-webkit-slider-runnable-track {
+    @include mainTrack;
+  }
+  &:focus::-webkit-slider-runnable-track {
+    @include mainTrack;
+  }
 }
 
-.main::-webkit-slider-thumb {
-  z-index: 0;
-  pointer-events: all;
-}
 
-.main::-moz-range-thumb {
-  z-index: 0;
-  pointer-events: all;
-}
-.main::-ms-thumb {
-  z-index: 1;
-  pointer-events: all;
-}
-.main::-webkit-slider-runnable-track {
-  z-index: -11;
-  pointer-events: none;
-}
-
-.main:focus::-webkit-slider-runnable-track {
-  z-index: -11;
-  pointer-events: none;
-}
-
-.main::-moz-range-track {
-  z-index: -11;
-  border: 0px solid #ECEEEE;
-  pointer-events: none;
-  height: 15px;
-}
-.main::-ms-track {
-  z-index: 0;
-  pointer-events: none;
-}
-
-.main::-ms-fill-lower {
-  background: #c5c5c5;
-  border: 0px solid #010101;
-  border-radius: 2.6px;
-}
-.main:focus::-ms-fill-lower {
-  background: #c5c5c5;
-}
-.main::-ms-fill-upper {
-  background: #2F9ABE;
-  border: 0px solid #010101;
-  border-radius: 2.6px;
-}
-.main:focus::-ms-fill-upper {
-  background: #2F9ABE;
-}
