@@ -2,6 +2,7 @@
 .label-container {
   display: flex; 
   flex-direction: row;
+  align-items: center;
 
   .slider-label {
     color: #57686b;
@@ -28,7 +29,7 @@
   flex-direction: row; 
   align-items: center; 
   justify-items: center;
-  margin-top: 4px;
+  margin-top: 8px;
   
   .value-label {
     min-width: 20px;
