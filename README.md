@@ -1,27 +1,74 @@
-# TolentinosChallenge
+## Range component
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+Componente para range de seleção de periodo (valor minímo e máximo)
 
-## Development server
+### Tabela de propriedades
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+| Prop        | Tipo    | Valor padrão | Descrição                            |  
+|-------------|---------|--------------|--------------------------------------|
+| min         | number  | 0            | Valor mínimo                         |
+| max         | number  | 100          | Valor máximo                         |
+| label       | string  | ""           | Rótulo do campo                      |
+| disabled    | boolean | false        | Desabilita a interação do componente |
+| optional    | boolean | true         | Informa que o componente é opcional  |
+| hide-values | boolean | false        | Esconde os valores do componente     |
 
-## Code scaffolding
+#### Interface de representação de valor do component
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+O model deste componente é representado pela seguinte interface:
 
-## Build
+```typescript
+  interface IRangeComponentValue {
+      min: number;
+      max: number;
+  }
+```
+### Utilização em formulários
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Este componente pode ser utilizado em Template Driven e Reactive Forms informando tanto o ngModel ou o formControlName.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+Para utilização em template driven (ngModel):
+```typescript
+import { IRangeComponentValue } from './components/range/range.component';
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+@Component({
+  selector: 'app-root',
+  template: `<app-range name="meuModel" [(ngModel)]="meuModel"></app-range>`
+})
+export class AppComponent {
+    meuModel: IRangeComponentValue = {
+        min: 10,
+        max: 50
+    };
+}
+```
 
-## Further help
+Para utilização com formulários reativos:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```typescript
+@Component({
+  selector: 'app-root',
+  template: `
+    <form [formGroup]="form">
+      <app-range formControlName="reactive"></app-range>
+    </form>
+  `,
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      reactive: {
+        min: 0,
+        max: 50
+      }
+    });
+  }
+}
+```

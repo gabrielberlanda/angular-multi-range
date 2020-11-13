@@ -8,7 +8,6 @@ import { IRangeComponentValue } from './components/range/range.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'tolentinos-challenge';
   form: FormGroup;
 
   outerValue: IRangeComponentValue = {
