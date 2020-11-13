@@ -1,9 +1,25 @@
 
+.label-container {
+  display: flex; 
+  flex-direction: row;
+
+  .slider-label {
+    flex: 1;
+  }
+  .slider-optional-label {
+    font-style: italic; 
+    font-size: 90%;
+  }
+
+}
+
+
 .sliders-container {
   position: relative;
   display: block;
   width: 99.5%;
 }
+
 
 .input-container {
   display: flex; 
@@ -11,6 +27,17 @@
   align-items: center; 
   justify-items: center;
   margin-top: 4px;
+  
+  .value-label {
+    min-width: 20px;
+  }
+  .value-label:first-child {
+    margin-right: 4px;
+  }
+  .value-label:last-child {
+    margin-left: 4px;
+    text-align: end;
+  }
 }
 
 .slider-label {

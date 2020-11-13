@@ -2,8 +2,10 @@
 <app-range 
   label="Teste"
   [disabled]="false"
-  [hideValues]="false"
-  [optional]="false"
+  [hide-values]="false"
+  [optional]="true"
+  name="outerValue"
+  ngDefaultControl
   [(ngModel)]="outerValue"
 ></app-range>
 
@@ -12,7 +14,7 @@
 {{ outerValue | json }}
 
 <form [formGroup]="form">
-  <app-range formControlName="reactive" [disabled]="true"></app-range>
+  <app-range formControlName="reactive"></app-range>
 </form>
 
 <pre>{{ form.value | json }}</pre>

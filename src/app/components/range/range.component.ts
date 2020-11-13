@@ -43,7 +43,7 @@ export class RangeComponent implements ControlValueAccessor {
   @Input()
   max: number = 100;
 
-  @Input()
+  @Input('hide-values')
   hideValues: boolean = false;
 
   @Input()

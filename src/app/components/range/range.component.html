@@ -1,10 +1,10 @@
-<div class="label-container" style="display: flex; flex-direction: row;">
-  <label class="slider-label" style="flex: 1;">{{ label }}</label>
-  <span *ngIf="optional" style="font-style: italic; font-size: 90%">(Opcional)</span>
+<div class="label-container">
+  <label class="slider-label">{{ label }}</label>
+  <span *ngIf="optional" class="slider-optional-label">(Opcional)</span>
 </div>
   
 <div class="input-container" *ngIf="value">
-  <span *ngIf="!hideValues">{{ minValue }}</span>
+  <span class="value-label" *ngIf="!hideValues">{{ minValue }}</span>
 
   <div class='sliders-container'>
 
@@ -35,7 +35,7 @@
 
   </div>
 
-  <span *ngIf="!hideValues">{{ maxValue }}</span>
+  <span class="value-label" *ngIf="!hideValues">{{ maxValue }}</span>
 
 </div>
 
