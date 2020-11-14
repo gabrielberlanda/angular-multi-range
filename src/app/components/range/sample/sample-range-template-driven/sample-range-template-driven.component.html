@@ -1,4 +1,4 @@
-<section>
+<section class="example-container">
   <h3>Exemplo de uso em template driven forms</h3>
   <form #ageForm="ngForm" (ngSubmit)="onSubmit(ageForm)">
     <app-range name="age" label="Este local é recomendado para qual idade?" [(ngModel)]="model.age"></app-range>

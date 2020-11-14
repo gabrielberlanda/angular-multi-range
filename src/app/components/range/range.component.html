@@ -1,41 +1,43 @@
-<div class="label-container">
-  <label class="slider-label">{{ label }}</label>
-  <span class="slider-optional-label" *ngIf="optional">(Opcional)</span>
-</div>
-  
-<div class="input-container" *ngIf="value">
-  
-  <span class="value-label" *ngIf="!hideValues">{{ minValue }}</span>
-
-  <div class='sliders-container'>
-
-    <input 
-      class="hidden-range" 
-      name="min"  
-      [(ngModel)]="value.min"
-      type="range" 
-      step="1" 
-      [disabled]="disabled"
-      [max]="max" 
-      [min]="min" 
-      (change)="onValueChange($event)"
-    />
-
-    <input 
-      class="main" 
-      name="max"   
-      [(ngModel)]="value.max"
-      type="range" 
-      step="1"  
-      [ngStyle]="fillSelectRangeStyle" 
-      [disabled]="disabled"
-      [max]="max" 
-      [min]="min" 
-      (change)="onValueChange($event)"
-    />
-
+<div class="range-container">
+  <div class="label-container">
+    <label class="slider-label">{{ label }}</label>
+    <span class="slider-optional-label" *ngIf="optional">(Opcional)</span>
   </div>
-
-  <span class="value-label" *ngIf="!hideValues">{{ maxValue }}</span>
-
+    
+  <div class="input-container" *ngIf="value">
+    
+    <span class="value-label" *ngIf="!hideValues">{{ minValue }}</span>
+  
+    <div class='sliders-container'>
+  
+      <input 
+        class="hidden-range" 
+        name="min"  
+        [(ngModel)]="value.min"
+        type="range" 
+        step="1" 
+        [disabled]="disabled"
+        [max]="max" 
+        [min]="min" 
+        (change)="onValueChange($event)"
+      />
+  
+      <input 
+        class="main" 
+        name="max"   
+        [(ngModel)]="value.max"
+        type="range" 
+        step="1"  
+        [ngStyle]="fillSelectRangeStyle" 
+        [disabled]="disabled"
+        [max]="max" 
+        [min]="min" 
+        (change)="onValueChange($event)"
+      />
+  
+    </div>
+  
+    <span class="value-label" *ngIf="!hideValues">{{ maxValue }}</span>
+  
+  </div>
 </div>
