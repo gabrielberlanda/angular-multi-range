@@ -1,6 +1,6 @@
 <div class="label-container">
   <label class="slider-label">{{ label }}</label>
-  <span *ngIf="optional" class="slider-optional-label">(Opcional)</span>
+  <span class="slider-optional-label" *ngIf="optional">(Opcional)</span>
 </div>
   
 <div class="input-container" *ngIf="value">
@@ -13,25 +13,25 @@
       class="hidden-range" 
       name="min"  
       [(ngModel)]="value.min"
-      (change)="onValueChange($event)"
-      [disabled]="disabled"
       type="range" 
+      step="1" 
+      [disabled]="disabled"
       [max]="max" 
       [min]="min" 
-      step="1" 
+      (change)="onValueChange($event)"
     />
 
     <input 
       class="main" 
       name="max"   
       [(ngModel)]="value.max"
-      (change)="onValueChange($event)"
-      [disabled]="disabled"
       type="range" 
-      [max]="max" 
-      [min]="min" 
       step="1"  
       [ngStyle]="fillSelectRangeStyle" 
+      [disabled]="disabled"
+      [max]="max" 
+      [min]="min" 
+      (change)="onValueChange($event)"
     />
 
   </div>

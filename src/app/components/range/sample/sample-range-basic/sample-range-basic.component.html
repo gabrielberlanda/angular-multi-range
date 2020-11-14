@@ -1,1 +1,6 @@
-<p>sample-range-basic works!</p>
+<section>
+  <h3>Exemplo básico do componente range</h3>
+  <app-range label="Simples" [optional]="true" [hide-values]="true" [(ngModel)]="simpleRange"></app-range>
+  <app-range label="Desabilitado" [disabled]="true" [(ngModel)]="disabledRange"></app-range>
+  <app-range label="Range min/max alterado" [ngModel]="customMinMaxRange" [min]="-50" [max]="250" ></app-range>
+</section>

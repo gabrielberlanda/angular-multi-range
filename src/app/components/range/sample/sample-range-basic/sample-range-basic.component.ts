@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IRangeComponentValue } from '../../range.value.interface';
 
 @Component({
   selector: 'app-sample-range-basic',
@@ -7,6 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SampleRangeBasicComponent implements OnInit {
 
+  disabledRange: IRangeComponentValue = {
+    min: 20,
+    max: 50
+  };
+
+  simpleRange: IRangeComponentValue = {
+    min: 10,
+    max: 30
+  };
+
+  customMinMaxRange: IRangeComponentValue = {
+    min: 10,
+    max: 15
+  }
+  
   constructor() { }
 
   ngOnInit(): void {

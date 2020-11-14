@@ -1,1 +1,9 @@
-<p>sample-range-reactive-forms works!</p>
+<section>
+  <h3>Exemplo de uso com reactive forms</h3>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h4>Busca de apartamentos para locação</h4>
+    <app-range label="Valor do aluguel (R$)" [min]="0" [max]="3000" formControlName="rentRange"></app-range>
+    <br/>
+    <button type="submit">Pesquisar</button>
+  </form>
+</section>

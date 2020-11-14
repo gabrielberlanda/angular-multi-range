@@ -1,11 +1,7 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { convertToBoolean } from 'src/app/utils/util';
-
-export interface IRangeComponentValue {
-  min: number;
-  max: number;
-}
+import { IRangeComponentValue } from './range.value.interface';
 
 const valueDefault: IRangeComponentValue = { min: 0, max: 0 };
 
@@ -13,6 +9,29 @@ const valueDefault: IRangeComponentValue = { min: 0, max: 0 };
  * @description
  * 
  * Componente para range de seleção de periodo (valor minímo e máximo)
+ * 
+ * @example
+ * 
+ * <example name="sample-range-basic" title="Exemplo básico">
+ *  <file name="sample-range-basic/sample-range-basic.component.html"> </file>
+ *  <file name="sample-range-basic/sample-range-basic.component.ts"> </file>
+ *  <file name="sample-range-basic/sample-range-basic.component.spect.ts"> </file>
+ *  <file name="sample-range-basic/sample-range-basic.component.scss"> </file>
+ * </example>
+ * 
+ * <example name="sample-range-template-driven" title="Exemplo de uso com template driven">
+ *  <file name="sample-range-template-driven/sample-range-template-driven.component.html"> </file>
+ *  <file name="sample-range-template-driven/sample-range-template-driven.component.ts"> </file>
+ *  <file name="sample-range-template-driven/sample-range-template-driven.component.spect.ts"> </file>
+ *  <file name="sample-range-template-driven/sample-range-template-driven.component.scss"> </file>
+ * </example>
+ * 
+ * <example name="sample-range-reactive-form" title="Exemplo de uso com reactive form">
+ *  <file name="sample-range-reactive-forms/sample-range-reactive-forms.component.html"> </file>
+ *  <file name="sample-range-reactive-forms/sample-range-reactive-forms.component.ts"> </file>
+ *  <file name="sample-range-reactive-forms/sample-range-reactive-forms.component.spect.ts"> </file>
+ *  <file name="sample-range-reactive-forms/sample-range-reactive-forms.component.scss"> </file>
+ * </example>
  * 
  */
 @Component({

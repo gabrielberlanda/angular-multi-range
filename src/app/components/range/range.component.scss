@@ -1,3 +1,58 @@
+$base-thumb-size: 12px;
+$thumb-border-radius: 100%;
+$thumb-color: #2F9ABE;
+$disabled-color: #B6BDBF;
+$track-color: #ECEEEE;
+$track-width: 100% !default;
+$track-height: 4px !default;
+$track-radius: 5px !default;
+
+@mixin thumb {
+  height  : $base-thumb-size;
+  width   : $base-thumb-size;
+  border-radius: $thumb-border-radius;
+  background: $thumb-color;
+  cursor: pointer;
+}
+
+@mixin thumbDisabled {
+  cursor: not-allowed;
+  background: $disabled-color;
+}
+
+@mixin thumbFocused {
+  height: 16px;
+  width: 16px;
+}
+
+@mixin hiddenThumb {
+  z-index: 1;
+  pointer-events: all;
+}
+
+@mixin hiddenTrack {
+  z-index: -10;
+  pointer-events: none;
+}
+
+@mixin mainThumb {
+  z-index: 0;
+  pointer-events: all;
+}
+
+@mixin mainTrack {
+  z-index: -11;
+  pointer-events: none;
+}
+
+@mixin track {
+  width: $track-width;
+  height: $track-height;
+  cursor: pointer;
+  transition: all .2s ease;
+  background: transparent;
+  border-radius: 2px;
+}
 
 .label-container {
   display: flex; 
@@ -15,7 +70,6 @@
   }
 
 }
-
 
 .input-container {
   display: flex; 
@@ -41,8 +95,6 @@
   }
 }
 
-
-
 input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
   width: 99%; /* Specific width is required for Firefox. */
@@ -65,44 +117,6 @@ input[type=range]::-ms-track {
   background: transparent; 
   border-color: transparent;
   color: transparent;
-}
-
-
-@mixin thumb {
-  height  : $base-thumb-size;
-  width   : $base-thumb-size;
-  border-radius: $thumb-border-radius;
-  background: $thumb-color;
-  cursor: pointer;
-}
-
-@mixin thumbDisabled {
-  cursor: not-allowed;
-  background: $disabled-color;
-}
-
-@mixin thumbFocused {
-  height: 16px;
-  width: 16px;
-}
-
-
-$base-thumb-size: 12px;
-$thumb-border-radius: 100%;
-$thumb-color: #2F9ABE;
-$disabled-color: #B6BDBF;
-$track-color: #ECEEEE;
-$track-width: 100% !default;
-$track-height: 4px !default;
-$track-radius: 5px !default;
-
-@mixin track {
-  width: $track-width;
-  height: $track-height;
-  cursor: pointer;
-  transition: all .2s ease;
-  background: transparent;
-  border-radius: 2px;
 }
 
 input[type="range"] {
@@ -154,16 +168,6 @@ input[type="range"] {
   }
 }
 
-@mixin hiddenThumb {
-  z-index: 1;
-  pointer-events: all;
-}
-
-@mixin hiddenTrack {
-  z-index: -10;
-  pointer-events: none;
-}
-
 .hidden-range {
   position: absolute;
   z-index: 1;
@@ -186,17 +190,6 @@ input[type="range"] {
     @include hiddenTrack;
   }
   
-}
-
-
-@mixin mainThumb {
-  z-index: 0;
-  pointer-events: all;
-}
-
-@mixin mainTrack {
-  z-index: -11;
-  pointer-events: none;
 }
 
 .main {
