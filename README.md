@@ -76,3 +76,6 @@ export class AppComponent {
   }
 }
 ```
+
+### DEMO
+[Live Demo](https://stackblitz.com/github/gabrielberlanda/angular-multi-range)
