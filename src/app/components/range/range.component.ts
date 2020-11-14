@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { convertToBoolean } from 'src/app/utils/util';
+import { convertToBoolean } from './../../utils/util';
 import { IRangeComponentValue } from './range.value.interface';
 
 const valueDefault: IRangeComponentValue = { min: 0, max: 0 };
