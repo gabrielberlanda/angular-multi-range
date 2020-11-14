@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tolentinos-challenge": {
+    "angular-multi-range": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/tolentinos-challenge",
+            "outputPath": "dist/angular-multi-range",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "tolentinos-challenge:build"
+            "browserTarget": "angular-multi-range:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "tolentinos-challenge:build:production"
+              "browserTarget": "angular-multi-range:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tolentinos-challenge:build"
+            "browserTarget": "angular-multi-range:build"
           }
         },
         "test": {
@@ -114,18 +114,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "tolentinos-challenge:serve"
+            "devServerTarget": "angular-multi-range:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "tolentinos-challenge:serve:production"
+              "devServerTarget": "angular-multi-range:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "tolentinos-challenge",
+  "defaultProject": "angular-multi-range",
   "cli": {
     "analytics": "cfb2b40a-30a2-4a62-99c2-589a4b04187d"
   }
