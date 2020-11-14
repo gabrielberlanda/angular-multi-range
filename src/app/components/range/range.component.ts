@@ -1,11 +1,20 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { convertToBoolean } from 'src/app/utils/util';
 
 export interface IRangeComponentValue {
   min: number;
   max: number;
 }
 
+const valueDefault: IRangeComponentValue = { min: 0, max: 0 };
+
+/**
+ * @description
+ * 
+ * Componente para range de seleção de periodo (valor minímo e máximo)
+ * 
+ */
 @Component({
   selector: 'app-range',
   templateUrl: './range.component.html',
@@ -20,78 +29,178 @@ export interface IRangeComponentValue {
 })
 export class RangeComponent implements ControlValueAccessor {
   
-  _value: IRangeComponentValue = {
-    min: 0,
-    max: 0
-  };
+  private _min?: number = 0;
+  private _max?: number = 100;
+  private _hideValues?: boolean = false;
+  private _optional?: boolean = false;
+  private _disabled?: boolean = false;
+  private _label?: string = '';
+  private _value?: IRangeComponentValue = { ...valueDefault };
+  private onChangePropagate: any = null;
+  private onTouched: any = null;
+
+  /**
+   * @optional 
+   * 
+   * @description
+   * 
+   * Define a propriedade de valor mínimo para seleção
+   * 
+   * @default `0`
+   */
+  @Input() set min(val: number) {
+    if(!isNaN(val)) {
+      this._min = parseInt(<any>val, 10);
+    } else {
+      this._min = 0;
+    }
+  }
+
+  get min() {
+    return this._min;
+  }
+
+  /**
+   * @optional 
+   * 
+   * @description 
+   * 
+   * Define a propriedade de valor máximo para seleção
+   * 
+   * @default `100`
+   */
+  @Input() set max(val: number) {
+    if(!isNaN(val)) {
+      this._max = parseInt(<any>val, 10);
+    } else {
+      this._max = 100;
+    }
+  }
+
+  get max() {
+    return this._max;
+  }
+
+  /**
+   * @optional
+   * 
+   * @description
+   * 
+   * Se verdadeiro, oculta os labels de valor da seleção
+   * 
+   * @default `false`
+   */
+  @Input('hide-values') set hideValues(val: boolean) {
+    this._hideValues = convertToBoolean(val);
+  }
+
+  get hideValues() {
+    return this._hideValues;
+  }
   
-  @Input() set value(val: IRangeComponentValue) {
+  /**
+   * @optional
+   * 
+   * @description
+   * 
+   * Se verdadeiro, torna o campo de seleção opcional e exibe um label informativo
+   * 
+   * @default `false`
+   */
+  @Input() set optional(val: boolean) {
+    this._optional = convertToBoolean(val);
+  }
+  
+  get optional() {
+    return this._optional;
+  }
+
+  /**
+   * @optional
+   * 
+   * @description 
+   * 
+   * Se verdadeiro, desabilita a interação com o component
+   * 
+   * @default `false`
+   */
+
+  @Input() set disabled(val: boolean) {
+    this._disabled = convertToBoolean(val);
+  }
+
+  get disabled() {
+    return this._disabled;
+  }
+
+  /**
+   * @optional
+   * 
+   * @description
+   * 
+   * Rótulo do campo
+   * 
+   * @default `''`
+   */
+  @Input() set label(val: string) {
+    this._label = val || "";
+  }
+
+  get label() {
+    return this._label;
+  }
+
+  /**
+   * @optional
+   * 
+   * @description
+   * 
+   * Valor de seleção do component
+   * 
+   * @default  `min: 0, max: 0`
+   */
+  set value(val: IRangeComponentValue) {
     this._value = val;
-    this.propagateChanged(this._value);
+    if(this.onChangePropagate) {
+      this.onChangePropagate(this._value);
+    }
   }
 
   get value() {
     return this._value;
   }
 
-  @Input()
-  min: number = 0;
-  
-  @Input()
-  max: number = 100;
-
-  @Input('hide-values')
-  hideValues: boolean = false;
-
-  @Input()
-  optional: boolean = false;
-
-  @Input()
-  disabled: boolean = false;
-
-  @Input()
-  label: string = "";
-
-  constructor() { }
-  
-  propagateChanged = (_: any) => {};
-  propageteTouched = (_: any) => {}; 
-
-  writeValue(value: IRangeComponentValue): void {
-    if (value !== undefined) {
-      this.value = value;
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.propagateChanged = fn;
-  }
-
-
-  registerOnTouched(fn: any): void {
-    this.propageteTouched = fn;
-  }
-
-  onValueChange(ev) {
-    if(this.value.min > this.value.max) {
-      this.value = {
-        min: this.value.max,
-        max: this.value.min
-      }
-    }
-  }
-
+  /**
+   * @description
+   * 
+   * Getter utilizado para representar sempre o menor valor selecionado
+   * Utilizado para melhor usabilidade, pois pode conter delay de estilo e 
+   * exibição quando o valor mínimo ultrapassar durante a seleção dos valores
+   */
   get minValue() {
     if(this._value.min <= this._value.max) return this._value.min;
     return this._value.max;
   }
 
+  /**
+   * @description
+   * 
+   * Getter utilizado para representar sempre o maior valor selecionado
+   * Utilizado para melhor usabilidade, pois pode conter delay de estilo e 
+   * exibição quando o valor mínimo ultrapassar durante a seleção dos valores
+   */
   get maxValue() {
     if(this._value.max >= this._value.min) return this._value.max;
     return this._value.min;
   }
 
-  get minStyle() {
+  /**
+   * @description
+   * 
+   * Getter utilizado para gerar o estilo de gradiente que será utilizado para 
+   * preencher o gap de seleção dos valores dos inputs de range
+   */
+  get fillSelectRangeStyle() {
     var startval = (this.minValue - this.min) / (this.max - this.min);
     var endval = (this.maxValue - this.min) / (this.max - this.min);
 
@@ -123,5 +232,41 @@ export class RangeComponent implements ControlValueAccessor {
     };
   }
 
+  constructor() { }
+
+  // Função implementada do ControlValueAccessor
+  writeValue(value: IRangeComponentValue): void {
+    if (value !== undefined) {
+      this.value = value;
+    } else {
+      this.value = { ...valueDefault };
+    }
+  }
+
+  // Função implementada do ControlValueAccessor
+  // Usada para interceptar as mudanças e não atualizar automaticamente o Model
+  registerOnChange(fn: any): void {
+    this.onChangePropagate = fn;
+  }
+
+  // Função implementada do ControlValueAccessor
+  // Usada para interceptar as mudanças e não atualizar automaticamente o Model
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  /**
+   * @description
+   * 
+   * Função implementada para corrigir o valor mínimo/máximo caso os ranges ultrapassem uns aos outros
+   */
+  onValueChange() {
+    if(this.value.min > this.value.max) {
+      this.value = {
+        min: this.value.max,
+        max: this.value.min
+      }
+    }
+  }
 
 }

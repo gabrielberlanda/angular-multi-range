@@ -1,6 +1,10 @@
 ## Range component
 
-Componente para range de seleção de periodo (valor minímo e máximo)
+Componente para range de seleção de periodo (valor mínimo e máximo) 
+
+Cenários de uso
+- Filtro de valor (ex: Aluguel de 1000 a 2000 R$)
+- Filtro de idade miníma e máxima (ex: entre 18 a 30 anos)
 
 ### Tabela de propriedades
 

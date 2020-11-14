@@ -10,10 +10,7 @@ import { IRangeComponentValue } from './components/range/range.component';
 export class AppComponent {
   form: FormGroup;
 
-  outerValue: IRangeComponentValue = {
-    min: 0,
-    max: 10
-  }
+  outerValue: IRangeComponentValue;
 
   constructor(private fb: FormBuilder) {}
 
